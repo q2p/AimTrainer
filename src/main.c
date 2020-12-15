@@ -3,6 +3,7 @@
 #include "timer.h"
 #include "controls.h"
 #include "screen.h"
+#include "field.h"
 
 int main() {
 	controls_init();
@@ -184,6 +185,8 @@ int main() {
 		}
 
 		timing_loop();
+
+		drawbc();
 
 		render(screenSurface);
 

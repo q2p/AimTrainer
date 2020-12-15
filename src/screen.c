@@ -1,8 +1,8 @@
 #include "screen.h"
 #include "prng.h"
 
-uint16_t SCREEN_W = 512;
-uint16_t SCREEN_H = 512;
+uint16_t SCREEN_W = 4*160;
+uint16_t SCREEN_H = 4*90;
 
 uint8_t* SCREEN;
 
@@ -43,11 +43,11 @@ inline void render(SDL_Surface* surface) {
 	uint8_t* sc_end = SCREEN + SCREEN_W * SCREEN_H;
 	uint8_t* sc = SCREEN;
 	uint8_t* sr = surface->pixels;
-	*(uint32_t*)SCREEN = rand_32();
 	while (sc != sc_end) {
-		*(uint32_t*)sr = *(uint32_t*)SCREEN;
+		*(uint32_t*)sr = c[*sc];
 		sc++;
 		sr += l;
 	}
+	memset(SCREEN, 0, (size_t) SCREEN_W * (size_t) SCREEN_H);
 	SDL_UnlockSurface(surface);
 }
